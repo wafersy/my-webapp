@@ -1,0 +1,566 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>방귀병 의사 자격 시험</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Nanum+Myeongjo:wght@700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* 레이아웃: 680px 한 줄 기둥. 수험표 → 한 문제씩 푸는 시험지 → 면허증과 오답 처방전. */
+:root{
+  --bg:#EAF3EF;
+  --card:#FFFFFF;
+  --ink:#12302B;
+  --muted:#4B6760;
+  --line:#BBD3CA;
+  --teal:#0D7A68;
+  --teal-ink:#FFFFFF;
+  --gas:#D5E04A;
+  --hl:#D5E04A;
+  --stamp:#C8372B;
+  --ok-bg:color-mix(in srgb,var(--teal) 12%,var(--card));
+  --bad-bg:color-mix(in srgb,var(--stamp) 10%,var(--card));
+  --font-display:'Do Hyeon','Noto Sans KR',system-ui,sans-serif;
+  --font-body:'Noto Sans KR',system-ui,sans-serif;
+  --font-cert:'Nanum Myeongjo','Noto Serif KR',serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1917;--card:#162623;--ink:#E4F2ED;--muted:#9DB8B0;--line:#2B4540;
+    --teal:#3CC4AA;--teal-ink:#06201B;--gas:#D5E04A;--hl:#56650F;--stamp:#FF7B6B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1917;--card:#162623;--ink:#E4F2ED;--muted:#9DB8B0;--line:#2B4540;
+  --teal:#3CC4AA;--teal-ink:#06201B;--gas:#D5E04A;--hl:#56650F;--stamp:#FF7B6B;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--font-body);word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,p,dl,dd,ol,ul{margin:0}
+ol,ul{padding:0;list-style:none}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+.shell{
+  max-width:680px;margin:0 auto;
+  padding-block:20px 56px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+
+/* 상단 띠 */
+.mast{display:flex;align-items:center;gap:12px;padding-bottom:14px;border-bottom:2px solid var(--ink);font-size:.82rem;letter-spacing:.12em}
+.mast .org{font-weight:700}
+.mast .round{margin-left:auto;color:var(--muted)}
+.cloud{flex:none}
+
+/* 공통 버튼 */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--teal);color:var(--teal-ink);
+  border:2px solid var(--ink);border-radius:6px;
+  padding:12px 24px;font-family:var(--font-display);font-size:1.2rem;letter-spacing:.04em;
+  cursor:pointer;box-shadow:0 4px 0 var(--ink);
+  transition:transform .08s ease,box-shadow .08s ease;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 5px 0 var(--ink)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+
+/* 시작 화면 */
+#intro h1{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(2.7rem,12vw,4.4rem);line-height:1.08;margin-top:28px;text-wrap:balance;
+}
+#intro h1 mark{background:linear-gradient(transparent 56%,var(--hl) 56%);color:inherit;padding:0 .08em}
+.lead{margin-top:14px;font-size:1.05rem;color:var(--muted);max-width:34em}
+
+.ticket{margin-top:28px;background:var(--card);border:2px solid var(--ink);border-radius:6px;overflow:hidden}
+.ticket-hd{display:flex;justify-content:space-between;gap:12px;background:var(--ink);color:var(--bg);padding:8px 16px;font-size:.82rem;letter-spacing:.2em}
+.ticket-hd .no{letter-spacing:.08em;font-variant-numeric:tabular-nums}
+.ticket-body{padding:6px 16px 20px}
+.rows>div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.rows dt{color:var(--muted);font-size:.92rem}
+.rows dd{font-weight:700;text-align:right}
+.field{display:flex;flex-direction:column;gap:6px;margin-top:18px}
+.field label{font-weight:700;font-size:.92rem}
+.field input{
+  width:100%;padding:12px 14px;background:var(--bg);
+  border:2px solid var(--line);border-radius:6px;font-size:1.05rem;
+}
+.field input:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--teal) 28%,transparent)}
+.ticket .btn{margin-top:18px;width:100%}
+
+/* 진행 표시 */
+.meter{margin-top:20px}
+.meter-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.92rem}
+#qNum{font-family:var(--font-display);font-size:1.35rem;letter-spacing:.04em}
+#tally{color:var(--muted);font-variant-numeric:tabular-nums}
+.segs{display:flex;gap:5px;margin-top:8px}
+.segs li{flex:1;min-width:0;height:10px;border-radius:2px;background:var(--line)}
+.segs li.ok{background:var(--teal)}
+.segs li.bad{background:var(--stamp)}
+.segs li.now{background:var(--card);outline:2px solid var(--ink);outline-offset:1px}
+
+/* 시험지 */
+.paper{margin-top:18px;background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:20px 18px 18px;box-shadow:5px 5px 0 var(--line)}
+.paper-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.chip{display:inline-block;background:var(--ink);color:var(--bg);padding:1px 10px;border-radius:3px;font-size:.8rem;letter-spacing:.1em;font-weight:700}
+.scene{color:var(--muted);font-size:.88rem;min-width:0}
+.prompt{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(1.55rem,6.4vw,2.1rem);line-height:1.35;margin-top:14px;text-wrap:balance;
+}
+.prompt.sentence::before{content:'“';color:var(--teal)}
+.prompt.sentence::after{content:'”';color:var(--teal)}
+.prompt.word{font-size:clamp(3rem,16vw,4.6rem);line-height:1.1;margin-top:10px}
+.prompt.word span{background:linear-gradient(transparent 58%,var(--hl) 58%);padding:0 .1em}
+.ask{margin-top:8px;font-weight:700;color:var(--teal);font-size:1rem}
+.ask:empty{display:none}
+
+.opts{display:grid;gap:10px;margin-top:18px}
+.opt{
+  display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  background:var(--card);border:2px solid var(--line);border-radius:6px;
+  padding:13px 14px;cursor:pointer;line-height:1.5;
+  transition:border-color .12s ease,background-color .12s ease;
+}
+.opt .mk{flex:none;font-family:var(--font-display);font-size:1.5rem;line-height:1;color:var(--teal)}
+.opt .tx{flex:1;min-width:0;font-size:1.05rem}
+.opt .tag{flex:none;font-size:.78rem;font-weight:700;letter-spacing:.06em}
+.opt:hover{border-color:var(--teal)}
+.opt.locked{cursor:default;pointer-events:none}
+.opt.dim{opacity:.62}
+.opt.is-ok{border-color:var(--teal);background:var(--ok-bg)}
+.opt.is-ok .tag{color:var(--teal)}
+.opt.is-bad{border-color:var(--stamp);background:var(--bad-bg)}
+.opt.is-bad .tag{color:var(--stamp)}
+.opt.is-bad .tx{text-decoration:line-through;text-decoration-thickness:2px}
+.keyhint{display:none;margin-top:12px;font-size:.82rem;color:var(--muted)}
+@media (hover:hover) and (pointer:fine){.keyhint{display:block}}
+
+.fb{margin-top:18px;padding:16px;border:2px dashed var(--line);border-radius:6px}
+.fb.ok{background:var(--ok-bg);border-color:var(--teal)}
+.fb.bad{background:var(--bad-bg);border-color:var(--stamp)}
+.verdict{font-family:var(--font-display);font-size:1.45rem;letter-spacing:.03em}
+.fb.ok .verdict{color:var(--teal)}
+.fb.bad .verdict{color:var(--stamp)}
+.fb .note{margin-top:6px}
+.fb .btn{margin-top:14px;width:100%}
+@media (min-width:520px){.fb .btn{width:auto;float:right}.fb::after{content:'';display:block;clear:both}}
+
+/* 결과 */
+.cert{margin-top:24px;background:var(--card);border:2px solid var(--ink);padding:6px;border-radius:6px}
+.cert-in{border:3px double var(--teal);padding:26px 18px 22px;text-align:center;border-radius:3px}
+.cert-org{font-family:var(--font-cert);font-weight:700;font-size:.92rem;letter-spacing:.3em;color:var(--muted)}
+.cert-title{font-family:var(--font-cert);font-weight:800;font-size:1.5rem;letter-spacing:.35em;margin-top:6px;text-indent:.35em}
+.cert-role{font-family:var(--font-display);font-weight:400;font-size:clamp(2.3rem,11vw,3.4rem);line-height:1.15;margin-top:14px}
+.cert-role span{background:linear-gradient(transparent 58%,var(--hl) 58%);padding:0 .12em}
+.cert-name{display:inline-block;margin-top:16px;font-family:var(--font-cert);font-weight:800;font-size:1.65rem;border-bottom:2px solid var(--ink);padding:0 .4em .1em;max-width:100%}
+.cert-meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px 12px;margin-top:20px}
+.cert-meta dt{font-size:.8rem;color:var(--muted);letter-spacing:.1em}
+.cert-meta dd{font-weight:700;font-variant-numeric:tabular-nums}
+.cert-text{margin:18px auto 0;max-width:30em;text-wrap:pretty}
+.cert-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;text-align:left}
+.cert-date{font-family:var(--font-cert);font-weight:700}
+.cert-date small{display:block;color:var(--muted);font-family:var(--font-body);font-weight:400;font-size:.82rem}
+.stamp{
+  flex:none;width:96px;height:96px;border-radius:50%;display:grid;place-items:center;
+  border:4px double var(--stamp);color:var(--stamp);
+  font-family:var(--font-display);font-size:1.6rem;letter-spacing:.05em;
+  transform:rotate(-10deg);animation:thud .45s ease-out both;
+}
+@keyframes thud{
+  0%{transform:rotate(-10deg) scale(1.9);opacity:0}
+  60%{transform:rotate(-10deg) scale(.93);opacity:1}
+  100%{transform:rotate(-10deg) scale(1);opacity:1}
+}
+.board{margin-top:22px}
+.board h2,.review h2{font-family:var(--font-display);font-weight:400;font-size:1.5rem;letter-spacing:.03em}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.tiles li{
+  display:flex;justify-content:space-between;align-items:center;gap:6px;
+  border:2px solid var(--line);border-radius:6px;padding:6px 10px;background:var(--card);
+  font-variant-numeric:tabular-nums;font-size:.9rem
+}
+.tiles li b{font-family:var(--font-display);font-weight:400;font-size:1.1rem}
+.tiles li.ok{border-color:var(--teal);color:var(--teal);background:var(--ok-bg)}
+.tiles li.bad{border-color:var(--stamp);color:var(--stamp);background:var(--bad-bg)}
+.review{margin-top:28px}
+.rx{padding:16px 0;border-top:2px dashed var(--line)}
+.rx:first-of-type{margin-top:8px}
+.rx .head{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.rx .q{margin-top:8px;font-weight:700;font-size:1.05rem}
+.rx .line{margin-top:6px}
+.rx .line span{display:inline-block;min-width:5.2em;font-size:.82rem;font-weight:700;letter-spacing:.06em}
+.rx .mine{color:var(--stamp);text-decoration:line-through;text-decoration-thickness:2px}
+.rx .right{color:var(--teal);font-weight:700}
+.rx .why{margin-top:8px;color:var(--muted);font-size:.95rem}
+.clean{margin-top:10px;padding:14px;border:2px solid var(--teal);border-radius:6px;background:var(--ok-bg);font-weight:700}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+@media (max-width:420px){.tiles{grid-template-columns:repeat(2,1fr)}.actions .btn{flex:1 1 100%}}
+
+@media (prefers-reduced-motion: reduce){
+  .stamp{animation:none}
+  .btn,.opt{transition:none}
+}
+</style>
+
+<div class="shell">
+  <header class="mast">
+    <svg class="cloud" viewBox="0 0 52 34" width="44" height="29" aria-hidden="true">
+      <g fill="var(--ink)"><circle cx="14" cy="22" r="11.5"/><circle cx="27" cy="14" r="12.5"/><circle cx="39" cy="22" r="10.5"/></g>
+      <g fill="var(--gas)"><circle cx="14" cy="22" r="9"/><circle cx="27" cy="14" r="10"/><circle cx="39" cy="22" r="8"/></g>
+    </svg>
+    <span class="org">대한방귀의사협회</span>
+    <span class="round">제1회 자격 시험</span>
+  </header>
+
+  <main>
+    <section id="intro" aria-labelledby="title">
+      <h1 id="title"><mark>방귀병</mark> 의사 자격 시험</h1>
+      <p class="lead">방귀가 뿡뿡 나오는 환자 앞에서도 예의 바르게 말할 수 있어야 진짜 의사예요. 낱말이나 문장을 읽고 바른 높임 표현을 골라 보세요.</p>
+
+      <form id="startForm" class="ticket" autocomplete="off">
+        <div class="ticket-hd"><span>수 험 표</span><span class="no">수험번호 <span id="ticketNo">0000</span></span></div>
+        <div class="ticket-body">
+          <dl class="rows">
+            <div><dt>시험 과목</dt><dd>높임 표현</dd></div>
+            <div><dt>문제 유형</dt><dd>낱말·문장을 높임 표현으로 바꾸기</dd></div>
+            <div><dt>문항 수</dt><dd id="tkCount">15문항</dd></div>
+            <div><dt>합격 기준</dt><dd id="tkPass">12문항 이상 정답</dd></div>
+          </dl>
+          <div class="field">
+            <label for="examinee">응시자 이름</label>
+            <input id="examinee" name="examinee" type="text" maxlength="12" placeholder="이름을 적어 주세요">
+          </div>
+          <button type="submit" class="btn" id="startBtn">시험 시작</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="quiz" hidden aria-label="시험 문제">
+      <div class="meter">
+        <div class="meter-head"><span id="qNum">문 1 / 10</span><span id="tally">맞힌 문제 0</span></div>
+        <ol class="segs" id="segs" aria-hidden="true"></ol>
+      </div>
+      <article class="paper">
+        <div class="paper-head"><span class="chip" id="kind"></span><span class="scene" id="scene"></span></div>
+        <p class="prompt" id="prompt"></p>
+        <p class="ask" id="ask"></p>
+        <div class="opts" id="opts" role="group" aria-label="보기"></div>
+        <p class="keyhint">키보드 1~4번 키로도 고를 수 있어요.</p>
+        <div class="fb" id="fb" hidden aria-live="polite">
+          <p class="verdict" id="verdict"></p>
+          <p class="note" id="note"></p>
+          <button type="button" class="btn" id="nextBtn">다음 문제</button>
+        </div>
+      </article>
+    </section>
+
+    <section id="result" hidden aria-label="시험 결과">
+      <article class="cert">
+        <div class="cert-in">
+          <p class="cert-org">대한방귀의사협회</p>
+          <h2 class="cert-title" id="certTitle">면 허 증</h2>
+          <p class="cert-role"><span id="certRole">방귀병 의사</span></p>
+          <p class="cert-name"><span id="certName"></span> 님</p>
+          <dl class="cert-meta">
+            <div><dt>점수</dt><dd id="certScore"></dd></div>
+            <div><dt>등급</dt><dd id="certGrade"></dd></div>
+            <div><dt id="certNoLabel">면허번호</dt><dd id="certNo"></dd></div>
+          </dl>
+          <p class="cert-text" id="certText"></p>
+          <div class="cert-foot">
+            <p class="cert-date"><span id="certDate"></span><small>대한방귀의사협회 회장</small></p>
+            <div class="stamp" id="stamp" aria-hidden="true">합격</div>
+          </div>
+        </div>
+      </article>
+
+      <div class="board">
+        <h2>문제별 결과</h2>
+        <ol class="tiles" id="tiles"></ol>
+      </div>
+
+      <section class="review">
+        <h2>오답 처방전</h2>
+        <div id="review"></div>
+      </section>
+
+      <div class="actions">
+        <button type="button" class="btn" id="againBtn">다시 한번 도전하기</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+  var BANK = [
+    {kind:'문장', scene:'대기실 · 쉬고 계신 환자 할아버지',
+     prompt:'할아버지가 방에서 잔다.', ask:'할아버지를 높여서 바꾼 문장은?',
+     answer:'할아버지께서 방에서 주무신다.',
+     wrong:['할아버지께서 방에서 자신다.','할아버지께서 방에서 잔다.','할아버지께서 방에서 잤다.'],
+     note:'‘자다’를 높이는 말은 ‘주무시다’예요. ‘자신다’처럼 ‘-시-’만 붙이는 것은 바른 높임이 아니에요.'},
+    {kind:'문장', scene:'접수처 · 교실에 계신 선생님 소식',
+     prompt:'선생님은 교실에 있다.', ask:'선생님을 높여서 바꾼 문장은?',
+     answer:'선생님께서는 교실에 계신다.',
+     wrong:['선생님께서는 교실에 있으시다.','선생님은 교실에 있어요.','선생님께서는 교실에 있다.'],
+     note:'사람이 어디에 머무를 때는 ‘있다’ 대신 ‘계시다’를 써요. ‘있으시다’는 ‘돈이 있으시다’처럼 가진 것을 말할 때 써요.'},
+    {kind:'낱말', scene:'접수처 · 어르신 환자께 여쭙기',
+     prompt:'이름', ask:'어르신께 쓰는 높임 낱말로 바꾸면?',
+     answer:'성함',
+     wrong:['연세','진지','말씀'],
+     note:'‘이름’의 높임말은 ‘성함’이에요. ‘연세’는 나이, ‘진지’는 밥, ‘말씀’은 말을 높인 낱말이에요.'},
+    {kind:'문장', scene:'진료실 · 아버지의 생일 이야기',
+     prompt:'아버지의 생일은 내일이다.', ask:'아버지를 높여서 바꾼 문장은?',
+     answer:'아버지의 생신은 내일입니다.',
+     wrong:['아버지의 생신은 내일이십니다.','아버지의 생일은 내일이십니다.','아버지의 생일은 내일입니다.'],
+     note:'‘생일’의 높임말은 ‘생신’이에요. ‘내일’은 사람이 아니라서 ‘이십니다’로 높이지 않아요.'},
+    {kind:'문장', scene:'약 처방 · 할머니께 약 드리기',
+     prompt:'나는 할머니에게 약을 주었다.', ask:'받는 분인 할머니를 높여서 바꾼 문장은?',
+     answer:'나는 할머니께 약을 드렸다.',
+     wrong:['나는 할머니께 약을 주셨다.','나는 할머니에게 약을 드렸다.','나는 할머니에게 약을 주었다.'],
+     note:'받는 분을 높일 때는 ‘에게’ 대신 ‘께’, ‘주다’ 대신 ‘드리다’를 써요. ‘주셨다’는 행동하는 사람을 높이는 말이라 여기서는 맞지 않아요.'},
+    {kind:'문장', scene:'진료실 · 의사 선생님께 질문하기',
+     prompt:'나는 의사 선생님에게 방귀가 나오는 까닭을 물었다.', ask:'의사 선생님을 높여서 바꾼 문장은?',
+     answer:'나는 의사 선생님께 방귀가 나오는 까닭을 여쭈었다.',
+     wrong:['나는 의사 선생님께 방귀가 나오는 까닭을 물으셨다.','나는 의사 선생님에게 방귀가 나오는 까닭을 여쭈었다.','나는 의사 선생님께 방귀가 나오는 까닭을 물었다.'],
+     note:'윗사람에게 물을 때는 ‘여쭈다’를 써요. ‘물으셨다’는 내가 아니라 선생님이 하는 행동일 때 써요.'},
+    {kind:'낱말', scene:'식당 · 할머니의 식사 시간',
+     prompt:'밥', ask:'어르신께 쓰는 높임 낱말로 바꾸면?',
+     answer:'진지',
+     wrong:['댁','생신','연세'],
+     note:'‘밥’의 높임말은 ‘진지’예요. ‘댁’은 집, ‘생신’은 생일, ‘연세’는 나이를 높인 낱말이에요.'},
+    {kind:'낱말', scene:'접수처 · 어르신 환자의 사는 곳',
+     prompt:'집', ask:'어르신께 쓰는 높임 낱말로 바꾸면?',
+     answer:'댁',
+     wrong:['성함','연세','말씀'],
+     note:'‘집’의 높임말은 ‘댁’이에요. ‘성함’은 이름, ‘연세’는 나이, ‘말씀’은 말을 높인 낱말이에요.'},
+    {kind:'낱말', scene:'진료실 · 어르신 환자의 생일 축하',
+     prompt:'생일', ask:'어르신께 쓰는 높임 낱말로 바꾸면?',
+     answer:'생신',
+     wrong:['댁','진지','연세'],
+     note:'‘생일’의 높임말은 ‘생신’이에요. ‘댁’은 집, ‘진지’는 밥, ‘연세’는 나이를 높인 낱말이에요.'},
+    {kind:'낱말', scene:'진료실 · 방귀 약을 먹는 할아버지',
+     prompt:'먹다', ask:'할아버지께서 하시는 행동을 높이는 낱말로 바꾸면?',
+     answer:'드시다',
+     wrong:['주무시다','계시다','드리다'],
+     note:'‘먹다’의 높임말은 ‘드시다’예요. ‘주무시다’는 자다, ‘계시다’는 있다, ‘드리다’는 주다를 높인 말이에요.'},
+    {kind:'문장 고르기', scene:'약국 · 접수 창구',
+     prompt:'높임 표현이 바른 문장은 어느 것일까요?', ask:'',
+     answer:'환자분, 처방전 나왔습니다.',
+     wrong:['환자분, 처방전 나오셨습니다.','환자분, 처방전이 나오십니다.','환자분, 처방전은 저쪽에 계십니다.'],
+     note:'높이는 대상은 사람이에요. 처방전 같은 물건에는 ‘-시-’를 붙이지 않아요.'},
+    {kind:'문장', scene:'카페 · 주문 창구',
+     prompt:'주문하신 커피 나오셨습니다.', ask:'물건을 높이는 잘못된 표현이에요. 바르게 고친 문장은?',
+     answer:'주문하신 커피 나왔습니다.',
+     wrong:['주문하신 커피 나오십니다.','주문하신 커피가 나오셨어요.','주문하신 커피 나오셨습니다.'],
+     note:'‘주문하신’은 손님을 높이는 말이라 맞아요. 하지만 커피는 물건이라서 ‘나오셨습니다’처럼 ‘-시-’를 붙이지 않아요.'},
+    {kind:'문장', scene:'신발 가게 · 계산대',
+     prompt:'그 사이즈의 신발은 품절이십니다.', ask:'물건을 높이는 잘못된 표현이에요. 바르게 고친 문장은?',
+     answer:'그 사이즈의 신발은 품절입니다.',
+     wrong:['그 사이즈의 신발은 품절이십니다.','그 사이즈의 신발은 품절이세요.','그 사이즈의 신발께서는 품절입니다.'],
+     note:'‘이십니다’의 ‘-시-’는 사람을 높일 때만 써요. 신발과 품절은 사람이 아니라서 ‘입니다’라고 말해야 해요.'},
+    {kind:'문장', scene:'병원 복도 · 어제 만난 할아버지',
+     prompt:'어제 나는 할아버지를 보았다.', ask:'할아버지를 높여서 바꾼 문장은?',
+     answer:'어제 나는 할아버지를 뵈었다.',
+     wrong:['어제 나는 할아버지를 보셨다.','어제 나는 할아버지를 뵈셨다.','어제 나는 할아버지를 보았다.'],
+     note:'웃어른을 만나 볼 때는 ‘뵙다’를 써요. ‘보셨다’나 ‘뵈셨다’는 내가 아니라 할아버지가 한 행동이 돼요.'},
+    {kind:'문장', scene:'진료실 · 어르신 환자께 처방 전하기',
+     prompt:'할머니, 방귀를 참으면 안 돼.', ask:'할머니를 높여서 바꾼 문장은?',
+     answer:'할머니, 방귀를 참으시면 안 돼요.',
+     wrong:['할머니, 방귀를 참으면 안 돼요.','할머니, 방귀를 참으시면 안 돼.','할머니, 방귀를 참으면 안 돼.'],
+     note:'행동하는 할머니를 높이는 ‘-시-’와, 듣는 할머니께 높여 말하는 ‘-요’를 함께 써야 해요.'}
+  ];
+
+  var N = BANK.length;
+  var PASS = Math.ceil(N * 0.8);
+  var PRACTICE = Math.ceil(N * 0.6);
+  var CIRC = ['①','②','③','④'];
+  var $ = function(id){ return document.getElementById(id); };
+  var run = [], idx = 0, locked = false, name = '응시자';
+  var examNo = String(Math.floor(1000 + Math.random() * 9000));
+
+  function shuffle(a){
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function show(id){
+    ['intro','quiz','result'].forEach(function(s){ $(s).hidden = (s !== id); });
+    window.scrollTo(0, 0);
+  }
+  function score(){ return run.filter(function(r){ return r.ok; }).length; }
+
+  function paintSegs(){
+    var ul = $('segs');
+    ul.innerHTML = '';
+    run.forEach(function(r, i){
+      var li = document.createElement('li');
+      if (r.picked !== undefined) li.className = r.ok ? 'ok' : 'bad';
+      else if (i === idx) li.className = 'now';
+      ul.appendChild(li);
+    });
+    $('tally').textContent = '맞힌 문제 ' + score();
+  }
+
+  function start(){
+    var picked = shuffle(BANK.slice());
+    run = picked.map(function(q){
+      var opts = [{t:q.answer, ok:true}].concat(q.wrong.map(function(w){ return {t:w, ok:false}; }));
+      return {q:q, opts:shuffle(opts)};
+    });
+    idx = 0;
+    show('quiz');
+    render();
+  }
+
+  function render(){
+    var cur = run[idx], q = cur.q;
+    locked = false;
+    $('qNum').textContent = '문 ' + (idx + 1) + ' / ' + run.length;
+    $('kind').textContent = q.kind;
+    $('scene').textContent = q.scene;
+    var p = $('prompt');
+    p.textContent = '';
+    if (q.kind === '낱말') {
+      p.className = 'prompt word';
+      var sp = document.createElement('span'); sp.textContent = q.prompt; p.appendChild(sp);
+    } else {
+      p.className = 'prompt ' + (q.kind === '문장' ? 'sentence' : 'plain');
+      p.textContent = q.prompt;
+    }
+    $('ask').textContent = q.ask;
+    var box = $('opts');
+    box.innerHTML = '';
+    cur.opts.forEach(function(o, k){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'opt';
+      b.innerHTML = '<span class="mk" aria-hidden="true">' + CIRC[k] + '</span><span class="tx"></span><span class="tag"></span>';
+      b.querySelector('.tx').textContent = o.t;
+      b.setAttribute('aria-label', (k + 1) + '번 ' + o.t);
+      b.addEventListener('click', function(){ pick(k); });
+      box.appendChild(b);
+    });
+    $('fb').hidden = true;
+    paintSegs();
+  }
+
+  function pick(k){
+    if (locked) return;
+    locked = true;
+    var cur = run[idx];
+    cur.picked = k;
+    cur.ok = cur.opts[k].ok;
+    var right = cur.opts.findIndex(function(o){ return o.ok; });
+    Array.prototype.forEach.call($('opts').children, function(b, i){
+      b.classList.add('locked');
+      var tag = b.querySelector('.tag');
+      if (i === right) { b.classList.add('is-ok'); tag.textContent = '정답'; }
+      else if (i === k) { b.classList.add('is-bad'); tag.textContent = '내 답'; }
+      else { b.classList.add('dim'); }
+    });
+    var fb = $('fb');
+    fb.className = 'fb ' + (cur.ok ? 'ok' : 'bad');
+    $('verdict').textContent = cur.ok ? '정답이에요!' : '아쉬워요. 정답은 ' + CIRC[right] + '번이에요.';
+    $('note').textContent = cur.q.note;
+    $('nextBtn').textContent = (idx === run.length - 1) ? '결과 보기' : '다음 문제';
+    fb.hidden = false;
+    paintSegs();
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    fb.scrollIntoView({block:'nearest', behavior: reduce ? 'auto' : 'smooth'});
+    $('nextBtn').focus({preventScroll:true});
+  }
+
+  function next(){
+    if (!locked) return;
+    idx++;
+    if (idx >= run.length) finish(); else { render(); window.scrollTo(0, 0); }
+  }
+
+  function finish(){
+    var s = score(), n = run.length, pass = s >= PASS;
+    var grade = s === n ? '방귀병 명의' : s >= PASS ? '방귀병 전문의' : s >= PRACTICE ? '방귀병 수련의' : '방귀병 실습생';
+    $('certTitle').textContent = pass ? '면 허 증' : '재시험 안내서';
+    $('certRole').textContent = pass ? '방귀병 의사' : grade;
+    $('certName').textContent = name;
+    $('certScore').textContent = s + ' / ' + n;
+    $('certGrade').textContent = grade;
+    $('certNoLabel').textContent = pass ? '면허번호' : '수험번호';
+    $('certNo').textContent = '방-' + examNo;
+    $('certText').textContent = pass
+      ? name + ' 님은 높임 표현 시험에서 ' + n + '문제 중 ' + s + '문제를 맞혀 방귀병 의사의 자격을 인정받았습니다. 어떤 방귀 앞에서도 예의 바르게 진료하세요.'
+      : name + ' 님은 ' + n + '문제 중 ' + s + '문제를 맞혔어요. 합격 기준은 ' + PASS + '문제예요. 오답 처방전을 읽고 다시 도전해 보세요.';
+    $('certDate').textContent = new Date().toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric'});
+    var st = $('stamp');
+    st.textContent = pass ? '합격' : '재시험';
+
+    var tiles = $('tiles');
+    tiles.innerHTML = '';
+    run.forEach(function(r, i){
+      var li = document.createElement('li');
+      li.className = r.ok ? 'ok' : 'bad';
+      li.innerHTML = '<b></b><span></span>';
+      li.querySelector('b').textContent = i + 1;
+      li.querySelector('span').textContent = r.ok ? '정답' : '오답';
+      tiles.appendChild(li);
+    });
+
+    var rv = $('review');
+    rv.innerHTML = '';
+    var wrongs = run.map(function(r, i){ return {r:r, i:i}; }).filter(function(x){ return !x.r.ok; });
+    if (!wrongs.length) {
+      var c = document.createElement('p');
+      c.className = 'clean';
+      c.textContent = '틀린 문제가 없어요. 완벽한 진단이었어요!';
+      rv.appendChild(c);
+    } else {
+      wrongs.forEach(function(x){
+        var r = x.r, q = r.q;
+        var el = document.createElement('article');
+        el.className = 'rx';
+        el.innerHTML = '<div class="head"><span class="chip"></span><span class="scene"></span></div>' +
+          '<p class="q"></p>' +
+          '<p class="line"><span>내가 고른 답</span><em class="mine"></em></p>' +
+          '<p class="line"><span>정답</span><b class="right"></b></p>' +
+          '<p class="why"></p>';
+        el.querySelector('.chip').textContent = '문 ' + (x.i + 1);
+        el.querySelector('.scene').textContent = q.kind;
+        el.querySelector('.q').textContent = q.kind === '문장 고르기' ? q.prompt : '제시: ' + q.prompt;
+        el.querySelector('.mine').textContent = r.opts[r.picked].t;
+        el.querySelector('.right').textContent = q.answer;
+        el.querySelector('.why').textContent = q.note;
+        rv.appendChild(el);
+      });
+    }
+    show('result');
+  }
+
+  $('ticketNo').textContent = examNo;
+  $('tkCount').textContent = N + '문항';
+  $('tkPass').textContent = PASS + '문항 이상 정답';
+  $('startForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    name = $('examinee').value.trim() || '응시자';
+    start();
+  });
+  $('nextBtn').addEventListener('click', next);
+  $('againBtn').addEventListener('click', start);
+  document.addEventListener('keydown', function(e){
+    if ($('quiz').hidden || locked) return;
+    if (e.target && e.target.tagName === 'INPUT') return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var n = parseInt(e.key, 10);
+    if (n >= 1 && n <= 4) pick(n - 1);
+  });
+})();
+</script>
+
+</body></html>
