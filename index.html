@@ -91,6 +91,7 @@ button,input{font:inherit;color:inherit}
   border:2px solid var(--line);border-radius:6px;font-size:1.05rem;
 }
 .field input:focus{border-color:var(--teal);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--teal) 28%,transparent)}
+.privacy{margin-top:2px;color:var(--muted);font-size:.84rem}
 .ticket .btn{margin-top:18px;width:100%}
 
 /* 진행 표시 */
@@ -221,7 +222,7 @@ button,input{font:inherit;color:inherit}
   <main>
     <section id="intro" aria-labelledby="title">
       <h1 id="title"><mark>방귀병</mark> 의사 자격 시험</h1>
-      <p class="lead">방귀가 뿡뿡 나오는 환자 앞에서도 예의 바르게 말할 수 있어야 진짜 의사예요. 낱말이나 문장을 읽고 바른 높임 표현을 골라 보세요.</p>
+      <p class="lead">높임 표현을 쓰지 않으면 방귀가 뿡뿡 나오는 병, 방귀병에 걸려요. 이 병은 높임 표현을 바르게 쓰는 의사만 고칠 수 있어요. 낱말이나 문장을 읽고 바른 높임 표현을 골라 보세요.</p>
 
       <form id="startForm" class="ticket" autocomplete="off">
         <div class="ticket-hd"><span>수 험 표</span><span class="no">수험번호 <span id="ticketNo">0000</span></span></div>
@@ -234,7 +235,8 @@ button,input{font:inherit;color:inherit}
           </dl>
           <div class="field">
             <label for="examinee">응시자 이름</label>
-            <input id="examinee" name="examinee" type="text" maxlength="12" placeholder="이름을 적어 주세요">
+            <input id="examinee" name="examinee" type="text" maxlength="12" placeholder="이름 또는 별명을 적어 주세요" autocomplete="off">
+            <p class="privacy">적은 이름은 면허증에만 쓰이고 어디에도 저장되지 않아요. 창을 닫으면 사라져요.</p>
           </div>
           <button type="submit" class="btn" id="startBtn">시험 시작</button>
         </div>
@@ -496,7 +498,7 @@ button,input{font:inherit;color:inherit}
     $('certNoLabel').textContent = pass ? '면허번호' : '수험번호';
     $('certNo').textContent = '방-' + examNo;
     $('certText').textContent = pass
-      ? name + ' 님은 높임 표현 시험에서 ' + n + '문제 중 ' + s + '문제를 맞혀 방귀병 의사의 자격을 인정받았습니다. 어떤 방귀 앞에서도 예의 바르게 진료하세요.'
+      ? name + ' 님은 높임 표현 시험에서 ' + n + '문제 중 ' + s + '문제를 맞혀 방귀병 의사의 자격을 인정받았습니다. 바른 높임 표현으로 방귀병 환자들을 고쳐 주세요.'
       : name + ' 님은 ' + n + '문제 중 ' + s + '문제를 맞혔어요. 합격 기준은 ' + PASS + '문제예요. 오답 처방전을 읽고 다시 도전해 보세요.';
     $('certDate').textContent = new Date().toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric'});
     var st = $('stamp');
